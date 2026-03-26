@@ -6,7 +6,7 @@
   <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white" alt="Flutter"></a>
   <a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-3.11-0175C2?logo=dart&logoColor=white" alt="Dart"></a>
   <a href="https://github.com/jayshivram/Precision/releases"><img src="https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white" alt="Android"></a>
-  <a href="https://github.com/jayshivram/Precision/releases/latest"><img src="https://img.shields.io/github/v/release/jayshivram/Precision?color=78DC77&label=Latest%20Release" alt="Release"></a>
+  <a href="https://github.com/jayshivram/Precision/releases/latest"><img src="https://img.shields.io/github/v/release/jayshivram/Precision?include_prereleases&sort=semver&color=78DC77&label=Latest%20Release" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 </p>
 
