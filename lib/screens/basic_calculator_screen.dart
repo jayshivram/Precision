@@ -77,7 +77,7 @@ class BasicCalculatorScreen extends ConsumerWidget {
 
                   return Column(
                     children: [
-                      // Row 1: C DEL % ÷
+                      // Row 1: C DEL ( ) ÷
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -85,7 +85,7 @@ class BasicCalculatorScreen extends ConsumerWidget {
                           btn('', CalcButtonType.surface, () => notifier.delete(),
                               icon: Icon(Icons.backspace_outlined,
                                   color: AppColors.onSurface, size: 22)),
-                          btn('%', CalcButtonType.surface, () => notifier.inputOperator('%')),
+                          btn('( )', CalcButtonType.secondary, () => notifier.smartBracket()),
                           btn('÷', CalcButtonType.tertiary, () => notifier.inputOperator('÷')),
                         ],
                       ),
@@ -123,11 +123,11 @@ class BasicCalculatorScreen extends ConsumerWidget {
                         ],
                       ),
                       SizedBox(height: spacing),
-                      // Row 5: +/- 0 . =
+                      // Row 5: % 0 . =
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          btn('+/-', CalcButtonType.surface, () => notifier.toggleSign()),
+                          btn('%', CalcButtonType.surface, () => notifier.inputOperator('%')),
                           btn('0', CalcButtonType.surface, () => notifier.inputDigit('0')),
                           btn('.', CalcButtonType.surface, () => notifier.inputDecimal()),
                           SizedBox(

@@ -149,7 +149,7 @@ class CalculatorNotifier extends StateNotifier<CalculatorState> {
       state = const CalculatorState(expression: '0.', display: '0.');
       return;
     }
-    final parts = state.expression.split(RegExp(r'[+\-×÷]'));
+    final parts = state.expression.split(RegExp(r'[+\-×÷()]'));
     final lastPart = parts.isEmpty ? '' : parts.last;
     if (lastPart.contains('.')) return;
     final newExpr = '${state.expression}.';
@@ -265,6 +265,35 @@ class CalculatorNotifier extends StateNotifier<CalculatorState> {
       return;
     }
     final newExpr = state.expression + p;
+    state = state.copyWith(
+      expression: newExpr,
+      display: _formatDisplay(newExpr),
+      hasResult: false,
+      previewResult: _computePreview(newExpr),
+    );
+  }
+
+  /// Smart bracket: inserts '(' or ')' based on context.
+  /// Opens a bracket when it makes sense, closes one when there are unmatched opens.
+  void smartBracket() {
+    if (state.hasResult) {
+      state = CalculatorState(expression: '(', display: '(');
+      return;
+    }
+    final expr = state.expression;
+    final openCount = '('.allMatches(expr).length;
+    final closeCount = ')'.allMatches(expr).length;
+    // Insert ')' if there are unmatched '(' AND the last char is a digit or ')'
+    final lastChar = expr.isEmpty ? '' : expr[expr.length - 1];
+    final shouldClose = openCount > closeCount &&
+        (RegExp(r'[0-9.)]').hasMatch(lastChar));
+    final p = shouldClose ? ')' : '(';
+    // If opening after a digit, insert implicit multiplication
+    String prefix = expr;
+    if (p == '(' && expr.isNotEmpty && RegExp(r'[0-9.)πe]').hasMatch(lastChar)) {
+      prefix = '$expr×';
+    }
+    final newExpr = prefix + p;
     state = state.copyWith(
       expression: newExpr,
       display: _formatDisplay(newExpr),
