@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../constants/api_keys.dart';
+import 'package:intl/intl.dart';
 import '../constants/currencies.dart';
 import '../providers/currency_provider.dart';
 import '../theme/app_theme.dart';
@@ -330,31 +330,44 @@ class _CurrencyConverterScreenState extends ConsumerState<CurrencyConverterScree
                               ),
                             ),
                           ),
-                          if (kFreeCurrencyApiKey != 'YOUR_API_KEY_HERE') ...[
-                            const SizedBox(width: 8),
+                          const SizedBox(width: 8),
                             SizedBox(
                               height: 42,
                               child: Material(
-                                color: AppColors.surfaceContainerHigh,
+                                color: _showHistorical
+                                    ? AppColors.primary.withValues(alpha: 0.15)
+                                    : AppColors.surfaceContainerHigh,
                                 borderRadius: BorderRadius.circular(12),
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(12),
-                                  onTap: () {
-                                    setState(() => _showHistorical = !_showHistorical);
-                                    if (_showHistorical) _pickDate(context);
-                                  },
+                                  onTap: () => _showHistoricalSheet(context),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 14),
-                                    child: Icon(Icons.history,
-                                        color: _showHistorical
-                                            ? AppColors.primary
-                                            : AppColors.onSurfaceVariant,
-                                        size: 20),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(Icons.history,
+                                            color: _showHistorical
+                                                ? AppColors.primary
+                                                : AppColors.onSurfaceVariant,
+                                            size: 20),
+                                        if (_historicalDate != null && _showHistorical) ...[
+                                          const SizedBox(width: 6),
+                                          Text(
+                                            DateFormat('dd MMM').format(_historicalDate!),
+                                            style: GoogleFonts.inter(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
+                                        ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ],
                         ],
                       ),
                     ],
@@ -376,28 +389,21 @@ class _CurrencyConverterScreenState extends ConsumerState<CurrencyConverterScree
     );
   }
 
-  Future<void> _pickDate(BuildContext context) async {
-    final picked = await showDatePicker(
+  Future<void> _showHistoricalSheet(BuildContext context) async {
+    final picked = await showModalBottomSheet<DateTime>(
       context: context,
-      initialDate: DateTime.now().subtract(const Duration(days: 1)),
-      firstDate: DateTime(1999, 1, 1),
-      lastDate: DateTime.now().subtract(const Duration(days: 1)),
-      builder: (context, child) {
-        return Theme(
-          data: ThemeData.dark().copyWith(
-            colorScheme: const ColorScheme.dark(
-              primary: AppColors.primary,
-              onPrimary: AppColors.onPrimary,
-              surface: AppColors.surfaceContainerLow,
-              onSurface: AppColors.onSurface,
-            ),
-          ),
-          child: child!,
-        );
-      },
+      isScrollControlled: true,
+      backgroundColor: AppColors.surfaceContainerLow,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) => _HistoricalDateSheet(initialDate: _historicalDate),
     );
     if (picked != null) {
-      setState(() => _historicalDate = picked);
+      setState(() {
+        _historicalDate = picked;
+        _showHistorical = true;
+      });
     }
   }
 
@@ -428,6 +434,236 @@ class _CurrencyConverterScreenState extends ConsumerState<CurrencyConverterScree
     };
     return symbols[code] ?? '';
   }
+}
+
+class _HistoricalDateSheet extends StatefulWidget {
+  final DateTime? initialDate;
+  const _HistoricalDateSheet({this.initialDate});
+
+  @override
+  State<_HistoricalDateSheet> createState() => _HistoricalDateSheetState();
+}
+
+class _HistoricalDateSheetState extends State<_HistoricalDateSheet> {
+  DateTime? _selected;
+
+  static final List<_QuickDate> _quickDates = [
+    _QuickDate('Yesterday', const Duration(days: 1)),
+    _QuickDate('1 Week Ago', const Duration(days: 7)),
+    _QuickDate('1 Month Ago', const Duration(days: 30)),
+    _QuickDate('3 Months Ago', const Duration(days: 90)),
+    _QuickDate('6 Months Ago', const Duration(days: 180)),
+    _QuickDate('1 Year Ago', const Duration(days: 365)),
+    _QuickDate('5 Years Ago', const Duration(days: 1825)),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selected = widget.initialDate;
+  }
+
+  Future<void> _pickCustomDate() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _selected ?? DateTime.now().subtract(const Duration(days: 1)),
+      firstDate: DateTime(1999, 1, 1),
+      lastDate: DateTime.now().subtract(const Duration(days: 1)),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.dark().copyWith(
+            colorScheme: const ColorScheme.dark(
+              primary: AppColors.primary,
+              onPrimary: AppColors.onPrimary,
+              surface: AppColors.surfaceContainerLow,
+              onSurface: AppColors.onSurface,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      setState(() => _selected = picked);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 20,
+        right: 20,
+        top: 12,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: AppColors.onSurfaceVariant.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'HISTORICAL RATE',
+            style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 3,
+              color: AppColors.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Select a date to view exchange rates',
+            style: GoogleFonts.inter(
+              fontSize: 12,
+              color: AppColors.onSurfaceVariant.withValues(alpha: 0.7),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: _quickDates.map((qd) {
+              final date = DateTime.now().subtract(qd.duration);
+              final isActive = _selected != null &&
+                  _selected!.year == date.year &&
+                  _selected!.month == date.month &&
+                  _selected!.day == date.day;
+              return GestureDetector(
+                onTap: () => setState(() => _selected = date),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: isActive
+                        ? AppColors.primary.withValues(alpha: 0.15)
+                        : AppColors.surfaceContainerHigh,
+                    borderRadius: BorderRadius.circular(20),
+                    border: isActive
+                        ? Border.all(color: AppColors.primary.withValues(alpha: 0.5))
+                        : null,
+                  ),
+                  child: Text(
+                    qd.label,
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: isActive ? AppColors.primary : AppColors.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 16),
+          GestureDetector(
+            onTap: _pickCustomDate,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              decoration: BoxDecoration(
+                color: AppColors.surfaceContainerHigh,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.calendar_today, color: AppColors.onSurfaceVariant, size: 16),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Custom Date',
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  const Icon(Icons.arrow_forward_ios, color: AppColors.onSurfaceVariant, size: 12),
+                ],
+              ),
+            ),
+          ),
+          if (_selected != null) ...[
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.event, color: AppColors.primary, size: 16),
+                  const SizedBox(width: 8),
+                  Text(
+                    DateFormat('dd MMM yyyy').format(_selected!),
+                    style: GoogleFonts.manrope(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          const SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: Material(
+              borderRadius: BorderRadius.circular(14),
+              child: Ink(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  gradient: _selected != null
+                      ? const LinearGradient(
+                          colors: [AppColors.primary, AppColors.primaryContainer],
+                        )
+                      : null,
+                  color: _selected == null ? AppColors.surfaceContainerHigh : null,
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(14),
+                  onTap: _selected == null
+                      ? null
+                      : () => Navigator.pop(context, _selected),
+                  child: Center(
+                    child: Text(
+                      'VIEW RATE',
+                      style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2,
+                        color: _selected != null
+                            ? AppColors.onPrimary
+                            : AppColors.onSurfaceVariant.withValues(alpha: 0.5),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuickDate {
+  final String label;
+  final Duration duration;
+  const _QuickDate(this.label, this.duration);
 }
 
 class _CurrencyPickerSheet extends StatefulWidget {

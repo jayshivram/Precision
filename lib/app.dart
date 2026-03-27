@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'providers/app_state_provider.dart';
+import 'providers/update_provider.dart';
 import 'screens/basic_calculator_screen.dart';
 import 'screens/scientific_calculator_screen.dart';
 import 'screens/unit_converter_screen.dart';
 import 'screens/currency_converter_screen.dart';
 import 'screens/splash_screen.dart';
+import 'services/notification_service.dart';
 import 'theme/app_theme.dart';
 import 'widgets/history_panel.dart';
 import 'widgets/settings_panel.dart';
@@ -56,6 +58,7 @@ class _AppShell extends ConsumerStatefulWidget {
 
 class _AppShellState extends ConsumerState<_AppShell> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _updateBannerDismissed = false;
 
   static const _tabs = ['BASIC', 'SCIENTIFIC', 'CONVERTER', 'CURRENCY'];
   static const _tabIcons = [
@@ -75,6 +78,17 @@ class _AppShellState extends ConsumerState<_AppShell> {
       systemNavigationBarIconBrightness: Brightness.light,
     ));
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // Check for updates and fire system notification if available
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final container = ProviderScope.containerOf(context);
+      final info = await container.read(updateProvider.future);
+      if (info != null && info.hasUpdate && mounted) {
+        final granted = await NotificationService.requestPermission();
+        if (granted) {
+          await NotificationService.showUpdateNotification(info.latestVersion);
+        }
+      }
+    });
   }
 
   @override
@@ -187,13 +201,34 @@ class _AppShellState extends ConsumerState<_AppShell> {
           ),
         ),
       ),
-      body: IndexedStack(
-        index: activeTab,
-        children: const [
-          BasicCalculatorScreen(),
-          ScientificCalculatorScreen(),
-          UnitConverterScreen(),
-          CurrencyConverterScreen(),
+      body: Column(
+        children: [
+          // Update banner
+          Consumer(builder: (context, ref, _) {
+            if (_updateBannerDismissed) return const SizedBox.shrink();
+            final updateAsync = ref.watch(updateProvider);
+            return updateAsync.maybeWhen(
+              data: (info) {
+                if (info == null || !info.hasUpdate) return const SizedBox.shrink();
+                return _UpdateBanner(
+                  version: info.latestVersion,
+                  onDismiss: () => setState(() => _updateBannerDismissed = true),
+                );
+              },
+              orElse: () => const SizedBox.shrink(),
+            );
+          }),
+          Expanded(
+            child: IndexedStack(
+              index: activeTab,
+              children: const [
+                BasicCalculatorScreen(),
+                ScientificCalculatorScreen(),
+                UnitConverterScreen(),
+                CurrencyConverterScreen(),
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: MediaQuery.of(context).size.width < 600
@@ -259,6 +294,68 @@ class _AppShellState extends ConsumerState<_AppShell> {
               ),
             )
           : null,
+      ),
+    );
+  }
+}
+
+class _UpdateBanner extends StatelessWidget {
+  final String version;
+  final VoidCallback onDismiss;
+
+  const _UpdateBanner({required this.version, required this.onDismiss});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppColors.primary, AppColors.primaryContainer],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withValues(alpha: 0.25),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.system_update_outlined,
+              color: AppColors.onPrimary, size: 18),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Precision v$version is available!',
+                  style: GoogleFonts.manrope(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.onPrimary,
+                  ),
+                ),
+                Text(
+                  'Visit GitHub to download the update.',
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    color: AppColors.onPrimary.withValues(alpha: 0.8),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.close, color: AppColors.onPrimary, size: 18),
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            onPressed: onDismiss,
+          ),
+        ],
       ),
     );
   }

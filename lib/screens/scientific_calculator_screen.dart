@@ -212,10 +212,10 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                         btn('ln', CalcButtonType.secondary, () => notifier.inputFunction('ln')),
                         btn('log', CalcButtonType.secondary, () => notifier.inputFunction('log')),
                         btn('eˣ', CalcButtonType.secondary, () {
-                          notifier.inputConstant('e^');
+                          notifier.inputConstant('e^(');
                         }),
                         btn('10ˣ', CalcButtonType.secondary, () {
-                          notifier.inputConstant('10^');
+                          notifier.inputConstant('10^(');
                         }),
                         btn('x²', CalcButtonType.secondary, () => notifier.inputOperator('^2')),
                       ]),
@@ -230,12 +230,12 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                           notifier.inputConstant(r.toStringAsFixed(6));
                         }),
                       ]),
-                      // Row 5: C DEL mod % ÷
+                      // Row 5: C DEL mod 0 ÷
                       ...row([
                         btn('C', CalcButtonType.error, () => notifier.clear()),
                         iconBtn(CalcButtonType.surface, () => notifier.delete(), Icons.backspace_outlined),
                         btn('mod', CalcButtonType.secondary, () => notifier.inputOperator('%')),
-                        btn('%', CalcButtonType.surface, () => notifier.inputOperator('%')),
+                        btn('0', CalcButtonType.surface, () => notifier.inputDigit('0'), fs: 20),
                         btn('÷', CalcButtonType.tertiary, () => notifier.inputOperator('÷'), fs: 22),
                       ]),
                       // Row 6: 7 8 9 × +/-

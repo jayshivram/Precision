@@ -46,6 +46,8 @@ const Map<String, List<String>> _defaultUnits = {
   'Temperature': ['°C', '°F'],
   'Speed': ['km/h', 'mph'],
   'Time': ['h', 'min'],
+  'Finance': ['', ''],
+  'VAT': ['', ''],
 };
 
 class UnitConverterNotifier extends StateNotifier<UnitConverterState> {
@@ -88,6 +90,7 @@ class UnitConverterNotifier extends StateNotifier<UnitConverterState> {
   }
 
   void _convert() {
+    if (state.category == 'Finance' || state.category == 'VAT') return;
     if (state.fromValue.isEmpty) {
       state = state.copyWith(toValue: '');
       return;
