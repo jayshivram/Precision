@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../providers/calculator_provider.dart';
 import '../providers/history_provider.dart';
+import '../providers/settings_provider.dart';
 import '../theme/app_theme.dart';
 import '../widgets/calc_button.dart';
 import '../widgets/calc_display.dart';
@@ -14,6 +15,7 @@ class BasicCalculatorScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(calculatorProvider);
     final notifier = ref.read(calculatorProvider.notifier);
+    final haptic = ref.watch(settingsProvider).hapticFeedback;
 
     return SafeArea(
       child: Column(
@@ -62,6 +64,7 @@ class BasicCalculatorScreen extends ConsumerWidget {
                       child: CalcButton(
                         type: type,
                         onPressed: onTap,
+                        hapticEnabled: haptic,
                         child: icon ??
                             Text(
                               label,

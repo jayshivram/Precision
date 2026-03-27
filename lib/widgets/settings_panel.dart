@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../providers/settings_provider.dart';
 import '../theme/app_theme.dart';
 
-class SettingsPanel extends ConsumerWidget {
+class SettingsPanel extends ConsumerStatefulWidget {
   const SettingsPanel({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SettingsPanel> createState() => _SettingsPanelState();
+}
+
+class _SettingsPanelState extends ConsumerState<SettingsPanel> {
+  String _version = '';
+
+  @override
+  void initState() {
+    super.initState();
+    PackageInfo.fromPlatform().then((info) {
+      if (mounted) setState(() => _version = 'v${info.version}');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
     final notifier = ref.read(settingsProvider.notifier);
 
@@ -28,7 +44,7 @@ class SettingsPanel extends ConsumerWidget {
               ),
             ),
             Text(
-              'v1.0.0',
+              _version,
               style: GoogleFonts.inter(
                 fontSize: 12,
                 color: AppColors.onSurfaceVariant,

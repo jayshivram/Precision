@@ -107,6 +107,7 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                     child: CalcButton(
                       type: type,
                       onPressed: onTap,
+                      hapticEnabled: settings.hapticFeedback,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Padding(
@@ -132,6 +133,7 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                     child: CalcButton(
                       type: type,
                       onPressed: onTap,
+                      hapticEnabled: settings.hapticFeedback,
                       child: Icon(icon, color: _colorForType(type), size: 20),
                     ),
                   );

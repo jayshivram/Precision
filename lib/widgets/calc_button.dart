@@ -9,6 +9,7 @@ class CalcButton extends StatelessWidget {
   final CalcButtonType type;
   final VoidCallback onPressed;
   final double? fontSize;
+  final bool hapticEnabled;
 
   const CalcButton({
     super.key,
@@ -16,6 +17,7 @@ class CalcButton extends StatelessWidget {
     required this.type,
     required this.onPressed,
     this.fontSize,
+    this.hapticEnabled = true,
   });
 
   @override
@@ -56,7 +58,7 @@ class CalcButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         splashColor: fg.withValues(alpha: 0.15),
         onTap: () {
-          HapticFeedback.lightImpact();
+          if (hapticEnabled) HapticFeedback.lightImpact();
           onPressed();
         },
         child: Center(child: child),
