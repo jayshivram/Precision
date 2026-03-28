@@ -50,6 +50,14 @@ class _SettingsPanelState extends ConsumerState<SettingsPanel> {
                 color: AppColors.onSurfaceVariant,
               ),
             ),
+            const SizedBox(height: 4),
+            Text(
+              'Made by Jay Shivram',
+              style: GoogleFonts.inter(
+                fontSize: 11,
+                color: AppColors.onSurfaceVariant.withValues(alpha: 0.6),
+              ),
+            ),
             const SizedBox(height: 32),
 
             // Display section

@@ -23,6 +23,11 @@ class NotificationService {
     return granted ?? false;
   }
 
+  static Future<void> cancelUpdateNotification() async {
+    await init();
+    await _plugin.cancel(1001);
+  }
+
   static Future<void> showUpdateNotification(String version) async {
     await init();
     const details = NotificationDetails(

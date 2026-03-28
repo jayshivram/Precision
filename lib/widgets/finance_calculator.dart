@@ -18,7 +18,7 @@ class _FinanceCalculatorState extends State<FinanceCalculator>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
   }
 
   @override
@@ -59,6 +59,7 @@ class _FinanceCalculatorState extends State<FinanceCalculator>
               Tab(text: 'EMI'),
               Tab(text: 'SIP'),
               Tab(text: 'LUMPSUM'),
+              Tab(text: 'MARGIN'),
             ],
           ),
         ),
@@ -71,6 +72,7 @@ class _FinanceCalculatorState extends State<FinanceCalculator>
               _EMITab(),
               _SIPTab(),
               _LumpsumTab(),
+              _MarginMarkupTab(),
             ],
           ),
         ),
@@ -577,6 +579,171 @@ class _LumpsumTabState extends State<_LumpsumTab>
           const SizedBox(height: 8),
           _resultCard('ROI', _fmtPercent(_roi!),
               valueColor: AppColors.secondary),
+        ],
+      ],
+    );
+  }
+}
+
+// ─── Margin / Markup Tab ────────────────────────────────────────────────
+
+class _MarginMarkupTab extends StatefulWidget {
+  const _MarginMarkupTab();
+  @override
+  State<_MarginMarkupTab> createState() => _MarginMarkupTabState();
+}
+
+class _MarginMarkupTabState extends State<_MarginMarkupTab>
+    with AutomaticKeepAliveClientMixin {
+  final _cost = TextEditingController();
+  final _sale = TextEditingController();
+  final _markupPct = TextEditingController();
+
+  /// false = Cost + Sale Price mode, true = Cost + Markup % mode
+  bool _useMarkupPercent = false;
+
+  double? _grossProfit;
+  double? _marginOnSales;
+  double? _markupOnCost;
+  double? _costRatio;
+  double? _computedSalePrice;
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    _cost.dispose();
+    _sale.dispose();
+    _markupPct.dispose();
+    super.dispose();
+  }
+
+  void _calculate() {
+    final cost = _parseNum(_cost);
+    if (cost == null || cost <= 0) return;
+
+    double salePrice;
+    if (_useMarkupPercent) {
+      final markup = _parseNum(_markupPct);
+      if (markup == null) return;
+      salePrice = cost * (1 + markup / 100);
+    } else {
+      final sp = _parseNum(_sale);
+      if (sp == null || sp <= 0) return;
+      salePrice = sp;
+    }
+
+    final profit = salePrice - cost;
+    setState(() {
+      _grossProfit = profit;
+      _marginOnSales = (profit / salePrice) * 100;
+      _markupOnCost = (profit / cost) * 100;
+      _costRatio = (cost / salePrice) * 100;
+      _computedSalePrice = _useMarkupPercent ? salePrice : null;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        // Mode toggle
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => setState(() => _useMarkupPercent = false),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: !_useMarkupPercent
+                          ? AppColors.primary.withValues(alpha: 0.15)
+                          : AppColors.surfaceContainerHigh,
+                      borderRadius: BorderRadius.circular(12),
+                      border: !_useMarkupPercent
+                          ? Border.all(color: AppColors.primary.withValues(alpha: 0.5))
+                          : null,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'COST + SALE',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.5,
+                          color: !_useMarkupPercent
+                              ? AppColors.primary
+                              : AppColors.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => setState(() => _useMarkupPercent = true),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: _useMarkupPercent
+                          ? AppColors.primary.withValues(alpha: 0.15)
+                          : AppColors.surfaceContainerHigh,
+                      borderRadius: BorderRadius.circular(12),
+                      border: _useMarkupPercent
+                          ? Border.all(color: AppColors.primary.withValues(alpha: 0.5))
+                          : null,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'COST + MARKUP %',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.5,
+                          color: _useMarkupPercent
+                              ? AppColors.primary
+                              : AppColors.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        _inputField(controller: _cost, label: 'Cost Price'),
+        if (_useMarkupPercent)
+          _inputField(controller: _markupPct, label: 'Markup', suffix: '%')
+        else
+          _inputField(controller: _sale, label: 'Sale Price'),
+
+        _calcButton(_calculate),
+
+        if (_grossProfit != null) ...[
+          const SizedBox(height: 16),
+          if (_computedSalePrice != null) ...[
+            _resultCard('Sale Price', _fmtCurrency(_computedSalePrice!)),
+            const SizedBox(height: 8),
+          ],
+          _resultCard('Gross Profit', _fmtCurrency(_grossProfit!),
+              valueColor: AppColors.tertiary),
+          const SizedBox(height: 8),
+          _resultCard('Margin on Sales', _fmtPercent(_marginOnSales!)),
+          const SizedBox(height: 8),
+          _resultCard('Markup on Cost', _fmtPercent(_markupOnCost!),
+              valueColor: AppColors.secondary),
+          const SizedBox(height: 8),
+          _resultCard('Cost Ratio', _fmtPercent(_costRatio!),
+              valueColor: AppColors.onSurfaceVariant),
         ],
       ],
     );

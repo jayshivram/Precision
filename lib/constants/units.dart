@@ -73,6 +73,7 @@ const Map<String, List<String>> kUnitsByCategory = {
   'Time': ['ns', 'μs', 'ms', 's', 'min', 'h', 'd', 'wk', 'mo', 'yr'],
   'Finance': <String>[],
   'VAT': <String>[],
+  'Tax': <String>[],
 };
 
 const Map<String, String> kUnitNames = {

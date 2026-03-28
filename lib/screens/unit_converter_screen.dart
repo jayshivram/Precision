@@ -7,6 +7,7 @@ import '../theme/app_theme.dart';
 import '../utils/unit_conversion.dart';
 import '../widgets/finance_calculator.dart';
 import '../widgets/vat_calculator.dart';
+import '../widgets/provisional_tax_calculator.dart';
 
 class UnitConverterScreen extends ConsumerWidget {
   const UnitConverterScreen({super.key});
@@ -64,7 +65,9 @@ class UnitConverterScreen extends ConsumerWidget {
                 ? const FinanceCalculator()
                 : state.category == 'VAT'
                     ? const VATCalculator()
-                    : Padding(
+                    : state.category == 'Tax'
+                        ? const ProvisionalTaxCalculator()
+                        : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [

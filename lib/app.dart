@@ -212,7 +212,10 @@ class _AppShellState extends ConsumerState<_AppShell> {
                 if (info == null || !info.hasUpdate) return const SizedBox.shrink();
                 return _UpdateBanner(
                   version: info.latestVersion,
-                  onDismiss: () => setState(() => _updateBannerDismissed = true),
+                  onDismiss: () {
+                    setState(() => _updateBannerDismissed = true);
+                    NotificationService.cancelUpdateNotification();
+                  },
                 );
               },
               orElse: () => const SizedBox.shrink(),
