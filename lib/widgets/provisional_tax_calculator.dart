@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../constants/tax_rates.dart';
 import '../theme/app_theme.dart';
+import '../utils/formatters.dart';
 
 class ProvisionalTaxCalculator extends StatefulWidget {
   const ProvisionalTaxCalculator({super.key});
@@ -93,6 +94,7 @@ Widget _inputField({
     child: TextField(
       controller: controller,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      inputFormatters: [ThousandsInputFormatter()],
       style: GoogleFonts.manrope(
         fontSize: 16,
         fontWeight: FontWeight.w700,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../theme/app_theme.dart';
+import '../utils/formatters.dart';
 
 class VATCalculator extends StatefulWidget {
   const VATCalculator({super.key});
@@ -91,6 +92,7 @@ class _VATCalculatorState extends State<VATCalculator> {
             controller: _amountController,
             keyboardType:
                 const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [ThousandsInputFormatter()],
             onChanged: (_) => setState(() {}),
             style: GoogleFonts.manrope(
               fontSize: 16,

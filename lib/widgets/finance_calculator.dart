@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../theme/app_theme.dart';
+import '../utils/formatters.dart';
 
 class FinanceCalculator extends StatefulWidget {
   const FinanceCalculator({super.key});
@@ -98,6 +99,7 @@ Widget _inputField({
     child: TextField(
       controller: controller,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      inputFormatters: [ThousandsInputFormatter()],
       style: GoogleFonts.manrope(
         fontSize: 16,
         fontWeight: FontWeight.w700,

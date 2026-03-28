@@ -22,7 +22,7 @@ class ScientificCalculatorScreen extends ConsumerWidget {
         children: [
           // Display area (compact)
           Flexible(
-            flex: 2,
+            flex: 3,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: Column(
@@ -53,7 +53,7 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 4),
                   SizedBox(
-                    height: 24,
+                    height: 32,
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       alignment: Alignment.centerRight,
@@ -64,21 +64,21 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                                 ? '= ${state.previewResult}'
                                 : ' '),
                         style: GoogleFonts.manrope(
-                          fontSize: 18,
+                          fontSize: 22,
                           color: AppColors.onSurfaceVariant,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 48,
+                    height: 64,
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       alignment: Alignment.centerRight,
                       child: Text(
                         state.error ?? state.display,
                         style: GoogleFonts.manrope(
-                          fontSize: 44,
+                          fontSize: 56,
                           fontWeight: FontWeight.w800,
                           color: state.error != null ? AppColors.error : Colors.white,
                         ),
