@@ -168,7 +168,20 @@ Found a bug? Have an idea? Contributions are welcome.
 
 ## License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+Copyright (c) 2026 Jay Shivram. All rights reserved.
+
+This software and its source code are proprietary and confidential. Unauthorized copying, distribution, modification, or use of this code, in whole or in part, is strictly prohibited without the prior written permission of the copyright holder.
+
+For permission requests, contact: Jay Shivram.
+
+This project is licensed under the **Custom License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Attribution Required:**
+If you use, copy, modify, or distribute this code, you must provide clear and visible credit to:
+
+Jay Shivram — https://github.com/jayshivram/Precision
 
 ---
 
