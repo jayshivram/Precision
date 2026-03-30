@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Sora:wght@300;400;500;600&family=Azeret+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons@3.3.1/css/all/all.min.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -159,7 +160,10 @@
     .tech { padding: 80px 6vw; max-width: 1300px; margin: 0 auto; }
     .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 52px; }
     .tech-card { background: var(--bg2); border: 1px solid var(--border); padding: 28px 26px; transition: background 0.2s; }
-    .tech-card:first-child { border-radius: 16px 0 0 16px; } .tech-card:last-child { border-radius: 0 16px 16px 0; }
+    .tech-card:first-child { border-radius: 16px 0 0 0; }
+    .tech-card:nth-child(4) { border-radius: 0 16px 0 0; }
+    .tech-card:nth-child(5) { border-radius: 0 0 0 16px; }
+    .tech-card:last-child { border-radius: 0 0 16px 0; }
     .tech-card:hover { background: #1c1c1c; }
     .tech-layer { font-family: 'Azeret Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
     .tech-val { font-size: 15px; font-weight: 600; color: var(--text); }
@@ -439,7 +443,7 @@
       <li><a href="#features">Features</a></li>
       <li><a href="#releases">Releases</a></li>
       <li><a href="#build">Build</a></li>
-      <li><a href="https://github.com/jayshivram/Precision" target="_blank">GitHub ↗</a></li>
+      <li><a href="https://github.com/jayshivram/Precision" target="_blank" style="display:inline-flex;align-items:center;gap:5px;">GitHub <i class="fi fi-rr-arrow-up-right-from-square" style="font-size:11px;line-height:1;position:relative;top:0px;"></i></a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:12px;">
       <a id="nav-download-btn" href="https://github.com/jayshivram/Precision/releases/latest" class="nav-cta" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg> Download APK</a>
@@ -456,7 +460,7 @@
     <a href="#features" class="mobile-link">Features</a>
     <a href="#releases" class="mobile-link">Releases</a>
     <a href="#build" class="mobile-link">Build</a>
-    <a href="https://github.com/jayshivram/Precision" target="_blank" class="mobile-link">GitHub ↗</a>
+    <a href="https://github.com/jayshivram/Precision" target="_blank" class="mobile-link" style="display:flex;align-items:center;gap:6px;">GitHub <i class="fi fi-rr-arrow-up-right-from-square" style="font-size:12px;line-height:1;"></i></a>
     <a id="mobile-download-btn" href="https://github.com/jayshivram/Precision/releases/latest" target="_blank" class="cta-link mobile-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg> Download APK</a>
   </div>
 
@@ -556,21 +560,21 @@
         <span class="mode-icon">🧪</span>
         <div class="mode-title">Scientific <span>Calculator</span></div>
         <div class="mode-desc">Full scientific suite with trig (sin, cos, tan + inverses), logarithms (ln, log), powers, roots, and the constants π and e built right in. Switch between Degrees and Radians with one tap. Supports parentheses for complex nested expressions, factorials, absolute values, and random number generation.</div>
-        <div class="mode-pills"><span class="pill b">sin cos tan</span><span class="pill b">asin acos atan</span><span class="pill b">ln  log</span><span class="pill b">π  e</span><span class="pill">x²  x^y  √  e^x</span><span class="pill">Deg / Rad</span><span class="pill">Factorial  |x|</span></div>
+        <div class="mode-pills"><span class="pill b">sin cos tan</span><span class="pill b">asin acos atan</span><span class="pill b">ln  log</span><span class="pill b">π  e</span><span class="pill">x²  x^y  √  e^x  10^x</span><span class="pill">Deg / Rad</span><span class="pill">Factorial  |x|</span></div>
       </div>
       <div class="mode-card">
         <div class="mode-number">03 / 04</div>
         <span class="mode-icon">📏</span>
         <div class="mode-title">Unit <span>Converter</span></div>
-        <div class="mode-desc">Five unit categories with comprehensive coverage. Swap units instantly with the swap button. A quick-reference grid shows six related conversions at a glance so you never have to guess.</div>
-        <div class="mode-pills"><span class="pill o">Length</span><span class="pill o">Area</span><span class="pill o">Volume</span><span class="pill o">Mass</span><span class="pill o">Speed</span><span class="pill">mm → miles</span><span class="pill">mg → tons</span><span class="pill">m/s → knots</span></div>
+        <div class="mode-desc">Five unit categories with comprehensive coverage. Swap units instantly and see a quick-reference grid of six related conversions at a glance. <strong style="color:var(--text);font-weight:500">Length</strong> (mm–miles), <strong style="color:var(--text);font-weight:500">Area</strong> (mm²–mi², hectares, acres), <strong style="color:var(--text);font-weight:500">Volume</strong> (mL–ft³, gallons, pints, cups), <strong style="color:var(--text);font-weight:500">Mass</strong> (mg–metric tons, stones), <strong style="color:var(--text);font-weight:500">Speed</strong> (m/s, km/h, mph, knots).</div>
+        <div class="mode-pills"><span class="pill o">Length</span><span class="pill o">Area</span><span class="pill o">Volume</span><span class="pill o">Mass</span><span class="pill o">Speed</span><span class="pill">mm → miles</span><span class="pill">mg → metric tons</span><span class="pill">mL → gallons</span><span class="pill">m/s → knots</span></div>
       </div>
       <div class="mode-card">
         <div class="mode-number">04 / 04</div>
         <span class="mode-icon">💱</span>
         <div class="mode-title">Currency <span>Converter</span></div>
         <div class="mode-desc">Live exchange rates for 36+ world currencies via the Free Currency API. Searchable picker with country flags, auto-refreshing rates with a configurable interval, and a last-updated timestamp with live connection status (online / offline / error). Swap currencies with one tap.</div>
-        <div class="mode-pills"><span class="pill g">Live rates</span><span class="pill g">36+ currencies</span><span class="pill b">Online / Offline status</span><span class="pill">USD EUR GBP JPY</span><span class="pill">INR KES TZS UGX</span><span class="pill">BRL MXN ZAR NGN</span></div>
+        <div class="mode-pills"><span class="pill g">Live rates</span><span class="pill g">36+ currencies</span><span class="pill b">Online / Offline status</span><span class="pill">USD EUR GBP JPY CAD AUD CHF</span><span class="pill">CNY INR KRW SGD HKD THB IDR</span><span class="pill">AED SAR ZAR NGN KES TZS UGX</span><span class="pill">MXN BRL NOK SEK DKK RUB</span></div>
       </div>
     </div>
   </section>
@@ -659,6 +663,10 @@
       <div class="tech-card"><div class="tech-layer">Framework</div><div class="tech-val">Flutter · Dart</div><div class="tech-sub">99.9% Dart · v3.x</div></div>
       <div class="tech-card"><div class="tech-layer">State Management</div><div class="tech-val">Riverpod</div><div class="tech-sub">Reactive providers</div></div>
       <div class="tech-card"><div class="tech-layer">Math Engine</div><div class="tech-val">math_expressions</div><div class="tech-sub">Full expression parser</div></div>
+      <div class="tech-card"><div class="tech-layer">HTTP Client</div><div class="tech-val">http</div><div class="tech-sub">Network requests</div></div>
+      <div class="tech-card"><div class="tech-layer">Persistence</div><div class="tech-val">shared_preferences</div><div class="tech-sub">Local settings storage</div></div>
+      <div class="tech-card"><div class="tech-layer">Typography</div><div class="tech-val">Google Fonts</div><div class="tech-sub">Manrope · Inter</div></div>
+      <div class="tech-card"><div class="tech-layer">Formatting</div><div class="tech-val">intl</div><div class="tech-sub">Numbers &amp; dates</div></div>
       <div class="tech-card"><div class="tech-layer">Currency API</div><div class="tech-val">Free Currency API</div><div class="tech-sub">Live exchange rates</div></div>
     </div>
   </section>
