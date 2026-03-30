@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/images/precision_splash.png" alt="Precision — A calculator that feels like science" width="160"/>
+  <img src="assets/images/precision_banner.png" alt="Precision — A calculator that feels like science" width="100%"/>
 </p>
 
 <h1 align="center">Precision</h1>
