@@ -364,6 +364,65 @@
     }
     .ss-dot.active { background: var(--green); transform: scale(1.4); }
 
+    /* WHAT'S NEW (auto-injected from release body) */
+    .whats-new-section { padding: 80px 6vw; max-width: 1300px; margin: 0 auto; }
+    .release-body-card { background: var(--bg2); border: 1px solid rgba(120,220,119,0.15); border-radius: 20px; padding: 40px 44px; margin-top: 36px; }
+    .md-h2 { font-family: 'Dela Gothic One', sans-serif; font-size: 20px; color: var(--text); margin: 20px 0 10px; }
+    .md-h3 { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+    .md-h4 { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 600; color: var(--green); margin: 14px 0 6px; }
+    .md-p { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 10px 0; }
+    .md-ul { padding-left: 22px; margin: 12px 0; }
+    .md-ul li { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 5px 0; }
+    .md-code { font-family: 'Azeret Mono', monospace; font-size: 12px; color: var(--green); background: rgba(120,220,119,0.08); padding: 2px 7px; border-radius: 4px; }
+    .md-link { color: var(--blue); text-decoration: none; } .md-link:hover { text-decoration: underline; }
+
+    /* RECENT ACTIVITY (auto-injected from commits) */
+    .activity-section { padding: 80px 6vw; max-width: 1300px; margin: 0 auto; }
+    .commit-list { margin-top: 36px; display: flex; flex-direction: column; gap: 2px; }
+    .commit-item { display: grid; grid-template-columns: 78px 1fr auto; align-items: center; gap: 16px; background: var(--bg2); border: 1px solid var(--border); padding: 18px 24px; text-decoration: none; color: inherit; transition: background 0.2s; }
+    .commit-item:first-child { border-radius: 14px 14px 0 0; }
+    .commit-item:last-child  { border-radius: 0 0 14px 14px; }
+    .commit-item:only-child  { border-radius: 14px; }
+    .commit-item:hover { background: #1c1c1c; }
+    .commit-sha { font-family: 'Azeret Mono', monospace; font-size: 11px; color: var(--green); letter-spacing: 0.04em; }
+    .commit-msg { font-size: 13px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .commit-meta { font-family: 'Azeret Mono', monospace; font-size: 10px; color: var(--muted); white-space: nowrap; }
+
+    /* OPEN ISSUES (auto-injected when issues exist) */
+    .issues-section { padding: 80px 6vw; max-width: 1300px; margin: 0 auto; }
+    .issue-list { margin-top: 36px; display: flex; flex-direction: column; gap: 2px; }
+    .issue-item { display: grid; grid-template-columns: 52px 1fr auto auto; align-items: center; gap: 16px; background: var(--bg2); border: 1px solid var(--border); padding: 18px 24px; text-decoration: none; color: inherit; transition: background 0.2s; }
+    .issue-item:first-child { border-radius: 14px 14px 0 0; }
+    .issue-item:last-child  { border-radius: 0 0 14px 14px; }
+    .issue-item:only-child  { border-radius: 14px; }
+    .issue-item:hover { background: #1c1c1c; }
+    .issue-number { font-family: 'Azeret Mono', monospace; font-size: 12px; color: var(--muted); }
+    .issue-title  { font-size: 13px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .issue-labels { display: flex; gap: 6px; flex-wrap: wrap; }
+    .issue-label  { font-family: 'Azeret Mono', monospace; font-size: 9px; padding: 2px 8px; border-radius: 100px; border: 1px solid; letter-spacing: 0.04em; }
+    .issue-date   { font-family: 'Azeret Mono', monospace; font-size: 10px; color: var(--muted); white-space: nowrap; }
+
+    /* REPO TOPICS (auto-injected into tech section) */
+    .topics-row   { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .topics-label { font-family: 'Azeret Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+    .topic-pill   { font-family: 'Azeret Mono', monospace; font-size: 10px; color: var(--blue); background: rgba(158,202,255,0.07); border: 1px solid rgba(158,202,255,0.2); padding: 4px 12px; border-radius: 100px; text-decoration: none; transition: background 0.2s, border-color 0.2s; letter-spacing: 0.04em; }
+    .topic-pill:hover { background: rgba(158,202,255,0.13); border-color: rgba(158,202,255,0.4); }
+
+    /* Shared: "view more on GitHub" link below auto-sections */
+    .view-more-link { display: inline-block; margin-top: 18px; font-family: 'Azeret Mono', monospace; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+    .view-more-link:hover { color: var(--green); }
+
+    /* clickable meta tags in hero */
+    .meta-link { text-decoration: none; transition: color 0.2s; }
+    .meta-link:hover { color: var(--green) !important; }
+
+    @media (max-width: 720px) {
+      .commit-item { grid-template-columns: 1fr; gap: 4px; }
+      .issue-item  { grid-template-columns: 52px 1fr; gap: 8px; }
+      .issue-date, .issue-labels { display: none; }
+      .release-body-card { padding: 24px 20px; }
+    }
+
   </style>
 </head>
 <body>
@@ -415,7 +474,7 @@
       </p>
       <div class="hero-actions">
         <a id="hero-download-btn" href="https://github.com/jayshivram/Precision/releases/latest" class="btn-primary" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg> <span id="hero-download-label">Download Latest APK</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg> Download Latest APK
         </a>
         <a href="https://github.com/jayshivram/Precision/releases" class="btn-secondary" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
@@ -429,7 +488,11 @@
         <div class="meta-dot"></div>
         <span class="meta-tag"><span>No ads.</span> Free.</span>
         <div class="meta-dot"></div>
-        <span class="meta-tag" id="meta-releases"><span id="meta-releases-count">…</span> releases</span>
+        <a class="meta-tag meta-link" href="https://github.com/jayshivram/Precision/releases" target="_blank" id="meta-releases"><span id="meta-releases-count">…</span> releases</a>
+        <div class="meta-dot"></div>
+        <a class="meta-tag meta-link" href="https://github.com/jayshivram/Precision/stargazers" target="_blank">⭐ <span id="meta-stars-hero">…</span></a>
+        <div class="meta-dot"></div>
+        <a class="meta-tag meta-link" href="https://github.com/jayshivram/Precision/network/members" target="_blank"><span id="meta-forks-hero">…</span> forks</a>
       </div>
     </div>
 
@@ -466,6 +529,7 @@
     <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Calculator Modes</div></div>
     <div class="stat-item"><div class="stat-num">36+</div><div class="stat-label">World Currencies</div></div>
     <div class="stat-item"><div class="stat-num" id="stat-stars">…</div><div class="stat-label">GitHub Stars</div></div>
+    <div class="stat-item"><div class="stat-num" id="stat-forks">…</div><div class="stat-label">GitHub Forks</div></div>
     <div class="stat-item"><div class="stat-num" id="stat-downloads">…</div><div class="stat-label">Total Downloads</div></div>
     <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Ads. Ever.</div></div>
   </div>
@@ -638,7 +702,7 @@
       <p class="cta-sub">Download the signed APK directly. Just enable "Install from unknown sources" in Android settings, install, and go.</p>
       <div class="cta-buttons">
         <a id="cta-download-btn" href="https://github.com/jayshivram/Precision/releases/latest" class="btn-primary" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg> <span id="cta-download-label">Download Latest APK</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg> Download Latest APK
         </a>
         <a href="https://github.com/jayshivram/Precision/releases" class="btn-secondary" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
@@ -663,14 +727,17 @@
     </div>
   </section>
 
+  <!-- AUTO-GENERATED SECTIONS (What's New · Recent Activity · Open Issues) injected here by JS -->
+  <div id="dynamic-sections"></div>
+
   <hr class="divider" />
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-brand">
+    <a class="footer-brand" href="https://github.com/jayshivram/Precision" target="_blank" style="text-decoration:none;color:inherit;">
       <div class="footer-icon"><img src="web/precision_icon_v2.png" alt="Precision" onerror="this.parentElement.style.background='linear-gradient(135deg,#78DC77,#4CAF50)'" /></div>
       <span>Precision</span>
-    </div>
+    </a>
     <ul class="footer-links">
       <li><a href="https://github.com/jayshivram/Precision" target="_blank">GitHub</a></li>
       <li><a href="https://github.com/jayshivram/Precision/releases" target="_blank">Releases</a></li>
@@ -685,17 +752,34 @@
   </footer>
 
   <script>
-    const REPO = 'jayshivram/Precision';
+    const REPO   = 'jayshivram/Precision';
+    const GH     = 'https://github.com/' + REPO;
     const GH_API = 'https://api.github.com/repos/' + REPO;
-    const RAW = 'https://raw.githubusercontent.com/' + REPO + '/master';
+    const RAW    = 'https://raw.githubusercontent.com/' + REPO + '/master';
+
+    /* ── Helpers ─────────────────────────────────────────────────────────── */
 
     function fmtDate(iso) {
       return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
+    function fmtAgo(iso) {
+      const days = Math.floor((Date.now() - new Date(iso)) / 86400000);
+      if (days === 0) return 'today';
+      if (days === 1) return 'yesterday';
+      if (days < 30)  return days + 'd ago';
+      if (days < 365) return Math.floor(days / 30) + 'mo ago';
+      return Math.floor(days / 365) + 'y ago';
+    }
+
+    function fmtNum(n) {
+      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+      return n.toLocaleString();
+    }
+
     function apkUrl(release) {
       const apk = release.assets.find(a => a.name.endsWith('.apk'));
-      return apk ? apk.browser_download_url : release.html_url;
+      return apk ? apk.browser_download_url : (GH + '/releases/tag/' + release.tag_name);
     }
 
     function dlCount(release) {
@@ -704,12 +788,38 @@
       return apk.download_count.toLocaleString() + ' downloads';
     }
 
-    function fmtNum(n) {
-      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-      return n.toLocaleString();
+    function hexRgb(hex) {
+      const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return r ? parseInt(r[1],16)+','+parseInt(r[2],16)+','+parseInt(r[3],16) : '120,220,119';
     }
 
-    // ── Screenshot dot nav (extracted so it can be re-initialised after dynamic load)
+    /* Very small Markdown → safe HTML (for release bodies) */
+    function renderMarkdown(text) {
+      if (!text || !text.trim()) return '';
+      let h = text
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>')
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener" class="md-link">$1</a>')
+        .replace(/^### (.+)$/gm, '<h4 class="md-h4">$1</h4>')
+        .replace(/^## (.+)$/gm,  '<h3 class="md-h3">$1</h3>')
+        .replace(/^# (.+)$/gm,   '<h2 class="md-h2">$1</h2>')
+        .replace(/^[-*+] (.+)$/gm, '<li>$1</li>')
+        .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>');
+      // wrap consecutive <li> in <ul>
+      h = h.replace(/((?:<li>[\s\S]*?<\/li>\n?)+)/g, '<ul class="md-ul">$1</ul>');
+      // simple paragraph wrapping
+      h = h.split(/\n{2,}/).map(p => {
+        p = p.trim();
+        if (!p || /^<[hul]/.test(p)) return p;
+        return '<p class="md-p">' + p.replace(/\n/g, ' ') + '</p>';
+      }).join('\n');
+      return h;
+    }
+
+    /* ── Screenshot dot nav ──────────────────────────────────────────────── */
     function initDotNav() {
       const scroll = document.getElementById('ss-scroll');
       const dots   = document.querySelectorAll('.ss-dot');
@@ -718,23 +828,23 @@
         dot.addEventListener('click', () => {
           const phones = scroll.querySelectorAll('.screenshot-phone');
           const idx = parseInt(dot.dataset.index);
-          if (phones[idx]) phones[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          if (phones[idx]) phones[idx].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
         });
       });
       scroll.addEventListener('scroll', () => {
         const phones = Array.from(scroll.querySelectorAll('.screenshot-phone'));
-        const containerCenter = scroll.offsetWidth / 2;
-        let closestIdx = 0, closestDist = Infinity;
+        const ctr = scroll.offsetWidth / 2;
+        let ci = 0, cd = Infinity;
         phones.forEach((p, i) => {
-          const center = p.offsetLeft - scroll.scrollLeft + p.offsetWidth / 2;
-          const dist = Math.abs(center - containerCenter);
-          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+          const c = p.offsetLeft - scroll.scrollLeft + p.offsetWidth / 2;
+          const d = Math.abs(c - ctr);
+          if (d < cd) { cd = d; ci = i; }
         });
-        document.querySelectorAll('.ss-dot').forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+        document.querySelectorAll('.ss-dot').forEach((d, i) => d.classList.toggle('active', i === ci));
       }, { passive: true });
     }
 
-    // ── Render contributors
+    /* ── Render contributors ─────────────────────────────────────────────── */
     function renderContributors(contributors) {
       const grid = document.getElementById('contrib-grid');
       if (!grid) return;
@@ -743,6 +853,7 @@
         const card = document.createElement('a');
         card.href = c.html_url;
         card.target = '_blank';
+        card.rel = 'noopener';
         card.className = 'contrib-card';
         card.innerHTML =
           '<img class="contrib-avatar" src="' + c.avatar_url + '&s=112" alt="' + c.login + '" loading="lazy" />' +
@@ -752,90 +863,212 @@
       });
     }
 
-    // ── Render screenshots dynamically from GitHub Contents API
+    /* ── Render screenshots from GitHub Contents API ─────────────────────── */
     function renderScreenshots(files) {
       const scroll = document.getElementById('ss-scroll');
       const dotsEl = document.getElementById('ss-dots');
       if (!scroll || !dotsEl) return;
-
       const imgs = files
         .filter(f => /\.(jpe?g|png|webp)$/i.test(f.name))
         .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
-
       if (!imgs.length) return;
-
       scroll.innerHTML = '';
       dotsEl.innerHTML = '';
-
       imgs.forEach((img, i) => {
-        // Make a readable label from filename: SS1.jpg → SS1, basic_calculator.png → Basic Calculator
         const label = img.name
           .replace(/\.[^.]+$/, '')
           .replace(/[-_]/g, ' ')
-          .replace(/\bSS(\d+)\b/gi, (_, n) => ['Basic Calculator','Scientific Mode','Unit Converter','Currency Converter','History Panel','Settings'][+n - 1] || 'Screen ' + n);
-
+          .replace(/\bSS(\d+)\b/gi, (_, n) =>
+            ['Basic Calculator','Scientific Mode','Unit Converter','Currency Converter','History Panel','Settings'][+n - 1] || 'Screen ' + n);
         const phone = document.createElement('div');
         phone.className = 'screenshot-phone';
         phone.innerHTML = '<img src="' + img.download_url + '" alt="' + label + '" loading="lazy" /><div class="ss-label">' + label + '</div>';
         scroll.appendChild(phone);
-
         const dot = document.createElement('button');
         dot.className = 'ss-dot' + (i === 0 ? ' active' : '');
         dot.dataset.index = i;
         dotsEl.appendChild(dot);
       });
-
       initDotNav();
     }
 
-    // ── Main loader
+    /* ── AUTO-SECTION: What's New (from latest release body) ─────────────── */
+    function injectWhatsNew(release) {
+      if (document.getElementById('sec-whats-new')) return;
+      const body = (release.body || '').trim();
+      if (!body) return;
+      const releasesEl = document.getElementById('releases');
+      if (!releasesEl) return;
+
+      const hr = document.createElement('hr');
+      hr.className = 'divider';
+
+      const sec = document.createElement('section');
+      sec.id = 'sec-whats-new';
+      sec.className = 'whats-new-section';
+      sec.innerHTML =
+        '<div class="section-tag">// What\'s New</div>' +
+        '<h2 class="section-title">Latest in ' + release.tag_name + '</h2>' +
+        '<p class="section-sub" style="margin-bottom:0">Released ' + fmtDate(release.published_at) +
+        ' &nbsp;·&nbsp; <a href="' + GH + '/releases/tag/' + release.tag_name +
+        '" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">View on GitHub ↗</a></p>' +
+        '<div class="release-body-card">' + renderMarkdown(body) + '</div>';
+
+      releasesEl.parentElement.insertBefore(hr, releasesEl);
+      releasesEl.parentElement.insertBefore(sec, hr);
+    }
+
+    /* ── AUTO-SECTION: Recent Activity (from commits) ─────────────────────── */
+    function injectActivity(commits) {
+      if (document.getElementById('sec-activity') || !commits.length) return;
+      const dynEl = document.getElementById('dynamic-sections');
+      if (!dynEl) return;
+
+      const rows = commits.slice(0, 6).map(c => {
+        const msg    = (c.commit.message.split('\n')[0] || '').slice(0, 74);
+        const author = (c.commit.author && c.commit.author.name) || (c.author && c.author.login) || 'Unknown';
+        const sha    = c.sha.slice(0, 7);
+        const ago    = fmtAgo(c.commit.author.date);
+        return '<a class="commit-item" href="' + (c.html_url || GH + '/commit/' + c.sha) +
+          '" target="_blank" rel="noopener">' +
+          '<span class="commit-sha">' + sha + '</span>' +
+          '<span class="commit-msg">'  + msg + '</span>' +
+          '<span class="commit-meta">' + author + ' · ' + ago + '</span>' +
+          '</a>';
+      }).join('');
+
+      const sec = document.createElement('section');
+      sec.id = 'sec-activity';
+      sec.className = 'activity-section';
+      sec.innerHTML =
+        '<div class="section-tag">// Recent Activity</div>' +
+        '<h2 class="section-title">What\'s been shipping.</h2>' +
+        '<p class="section-sub">Latest commits to master, live from GitHub.</p>' +
+        '<div class="commit-list">' + rows + '</div>' +
+        '<a href="' + GH + '/commits/master" target="_blank" rel="noopener" class="view-more-link">View full commit history on GitHub ↗</a>';
+
+      dynEl.appendChild(sec);
+      dynEl.insertAdjacentHTML('beforeend', '<hr class="divider" />');
+    }
+
+    /* ── AUTO-SECTION: Open Issues ───────────────────────────────────────── */
+    function injectIssues(issues) {
+      if (document.getElementById('sec-issues') || !issues.length) return;
+      const dynEl = document.getElementById('dynamic-sections');
+      if (!dynEl) return;
+
+      const rows = issues.map(issue => {
+        const labels = (issue.labels || []).map(l =>
+          '<span class="issue-label" style="background:rgba(' + hexRgb('#' + l.color) +
+          ',0.15);border-color:rgba(' + hexRgb('#' + l.color) + ',0.4);color:#' + l.color + '">' +
+          l.name + '</span>'
+        ).join('');
+        return '<a class="issue-item" href="' + issue.html_url + '" target="_blank" rel="noopener">' +
+          '<span class="issue-number">#' + issue.number + '</span>' +
+          '<span class="issue-title">'  + issue.title  + '</span>' +
+          '<span class="issue-labels">' + labels        + '</span>' +
+          '<span class="issue-date">'   + fmtAgo(issue.created_at) + '</span>' +
+          '</a>';
+      }).join('');
+
+      const sec = document.createElement('section');
+      sec.id = 'sec-issues';
+      sec.className = 'issues-section';
+      sec.innerHTML =
+        '<div class="section-tag">// Open Issues</div>' +
+        '<h2 class="section-title">Active work &amp; known bugs.</h2>' +
+        '<p class="section-sub">Tracked live from GitHub. Found something? ' +
+        '<a href="' + GH + '/issues/new" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">Open an issue ↗</a></p>' +
+        '<div class="issue-list">' + rows + '</div>' +
+        '<a href="' + GH + '/issues" target="_blank" rel="noopener" class="view-more-link">View all issues on GitHub ↗</a>';
+
+      dynEl.appendChild(sec);
+      dynEl.insertAdjacentHTML('beforeend', '<hr class="divider" />');
+    }
+
+    /* ── AUTO-SECTION: Repo Topics (pills in tech section) ───────────────── */
+    function injectTopics(topics) {
+      if (!topics.length || document.getElementById('topics-row')) return;
+      const techEl = document.querySelector('.tech');
+      if (!techEl) return;
+      const row = document.createElement('div');
+      row.id = 'topics-row';
+      row.className = 'topics-row';
+      row.innerHTML = '<span class="topics-label">Topics</span>' +
+        topics.map(t =>
+          '<a href="https://github.com/topics/' + t + '" target="_blank" rel="noopener" class="topic-pill">' + t + '</a>'
+        ).join('');
+      techEl.appendChild(row);
+    }
+
+    /* ── Update tech-card language % from GitHub Languages API ──────────── */
+    function updateTechStack(languages) {
+      if (!languages || !Object.keys(languages).length) return;
+      const total   = Object.values(languages).reduce((a, b) => a + b, 0);
+      const subEl   = document.querySelector('.tech-card:first-child .tech-sub');
+      if (subEl) {
+        subEl.textContent = Object.entries(languages).slice(0, 3)
+          .map(([lang, bytes]) => lang + ' ' + ((bytes / total) * 100).toFixed(1).replace(/\.0$/, '') + '%')
+          .join(' · ');
+      }
+    }
+
+    /* ── Main loader ─────────────────────────────────────────────────────── */
     async function loadGitHubData() {
       try {
-        const [releasesRes, repoRes, contribRes, langsRes, screenshotsRes] = await Promise.all([
+        const [releasesRes, repoRes, contribRes, langsRes, screenshotsRes, commitsRes, issuesRes] = await Promise.all([
           fetch(GH_API + '/releases?per_page=20'),
           fetch(GH_API),
           fetch(GH_API + '/contributors?per_page=12'),
           fetch(GH_API + '/languages'),
-          fetch(GH_API + '/contents/screenshots')
+          fetch(GH_API + '/contents/screenshots'),
+          fetch(GH_API + '/commits?per_page=6&sha=master'),
+          fetch(GH_API + '/issues?state=open&per_page=5')
         ]);
 
         const releases     = await releasesRes.json();
         const repo         = await repoRes.json();
-        const contributors = contribRes.ok     ? await contribRes.json()       : [];
-        const languages    = langsRes.ok        ? await langsRes.json()         : {};
-        const screenshots  = screenshotsRes.ok  ? await screenshotsRes.json()  : null;
+        const contributors = contribRes.ok      ? await contribRes.json()      : [];
+        const languages    = langsRes.ok         ? await langsRes.json()        : {};
+        const screenshots  = screenshotsRes.ok   ? await screenshotsRes.json() : null;
+        const commits      = commitsRes.ok        ? await commitsRes.json()     : [];
+        const issues       = issuesRes.ok         ? await issuesRes.json()      : [];
 
         if (!Array.isArray(releases) || releases.length === 0) throw new Error('No releases');
 
-        // ── Release basics
-        const latest       = releases[0];
-        const latestApk    = apkUrl(latest);
+        /* ── Release basics */
+        const latest        = releases[0];
+        const latestApk     = apkUrl(latest);
         const latestVersion = latest.tag_name;
-        const latestDate   = fmtDate(latest.published_at);
+        const latestDate    = fmtDate(latest.published_at);
 
-        // Badge
-        document.getElementById('hero-badge').innerHTML =
+        /* Badge */
+        const badgeEl = document.getElementById('hero-badge');
+        if (badgeEl) badgeEl.innerHTML =
           '<span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;margin-right:8px"></span>' +
           latestVersion + ' &nbsp;·&nbsp; ' + latestDate;
 
-        // Download buttons
-        const label = 'Download Precision ' + latestVersion;
-        document.getElementById('hero-download-label').textContent = label;
-        document.getElementById('cta-download-label').textContent  = label;
-        document.getElementById('hero-download-btn').href  = latestApk;
-        document.getElementById('cta-download-btn').href   = latestApk;
-        document.getElementById('nav-download-btn').href   = latestApk;
-        const mobileBtn = document.getElementById('mobile-download-btn');
-        if (mobileBtn) {
-          mobileBtn.href = latestApk;
-          mobileBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg> Download Precision ${latestVersion}`;
-        }
+        /* Download buttons */
+        const label   = 'Download Precision ' + latestVersion;
+        const dlSvgLg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>';
+        const dlSvgSm = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>';
 
-        // Float card + release count
-        document.getElementById('float-version').textContent = latestVersion;
-        document.getElementById('meta-releases-count').textContent = releases.length;
+        const heroBtn = document.getElementById('hero-download-btn');
+        if (heroBtn)   { heroBtn.href = latestApk;   heroBtn.innerHTML   = dlSvgLg + ' ' + label; }
+        const ctaBtn  = document.getElementById('cta-download-btn');
+        if (ctaBtn)    { ctaBtn.href  = latestApk;   ctaBtn.innerHTML    = dlSvgLg + ' ' + label; }
+        const navBtn  = document.getElementById('nav-download-btn');
+        if (navBtn)    { navBtn.href  = latestApk; }
+        const mobBtn  = document.getElementById('mobile-download-btn');
+        if (mobBtn)    { mobBtn.href  = latestApk;   mobBtn.innerHTML    = dlSvgSm + ' Download Precision ' + latestVersion; }
 
-        // ── Total downloads across all releases
+        /* Float card + release count */
+        const floatV   = document.getElementById('float-version');
+        if (floatV)    floatV.textContent = latestVersion;
+        const relCount = document.getElementById('meta-releases-count');
+        if (relCount)  relCount.textContent = releases.length;
+
+        /* Stats: downloads */
         const totalDl = releases.reduce((acc, r) => {
           const apk = r.assets.find(a => a.name.endsWith('.apk'));
           return acc + (apk ? apk.download_count : 0);
@@ -843,72 +1076,104 @@
         const dlEl = document.getElementById('stat-downloads');
         if (dlEl) dlEl.textContent = totalDl > 0 ? fmtNum(totalDl) + '+' : '—';
 
-        // ── Repo stats (stars, forks, open issues)
-        if (repo && repo.stargazers_count !== undefined) {
-          const starsEl = document.getElementById('stat-stars');
-          if (starsEl) starsEl.textContent = fmtNum(repo.stargazers_count);
+        /* Stats: stars, forks, open issues */
+        if (repo) {
+          const starsEl  = document.getElementById('stat-stars');
+          const forksEl  = document.getElementById('stat-forks');
+          const starsH   = document.getElementById('meta-stars-hero');
+          const forksH   = document.getElementById('meta-forks-hero');
+          if (starsEl  && repo.stargazers_count !== undefined) starsEl.textContent  = fmtNum(repo.stargazers_count);
+          if (forksEl  && repo.forks_count      !== undefined) forksEl.textContent  = fmtNum(repo.forks_count);
+          if (starsH   && repo.stargazers_count !== undefined) starsH.textContent   = fmtNum(repo.stargazers_count);
+          if (forksH   && repo.forks_count      !== undefined) forksH.textContent   = fmtNum(repo.forks_count);
         }
 
-        // ── Language breakdown → footer
+        /* Footer + tech stack language % */
         if (languages && Object.keys(languages).length) {
-          const total   = Object.values(languages).reduce((a, b) => a + b, 0);
-          const [topLang, topBytes] = Object.entries(languages)[0];
-          const pct     = ((topBytes / total) * 100).toFixed(1).replace(/\.0$/, '');
-          const stackEl = document.getElementById('footer-stack');
-          if (stackEl) stackEl.textContent = 'Built with ☕ and Flutter · ' + topLang + ' ' + pct + '%';
+          const total      = Object.values(languages).reduce((a, b) => a + b, 0);
+          const [topL, topB] = Object.entries(languages)[0];
+          const pct        = ((topB / total) * 100).toFixed(1).replace(/\.0$/, '');
+          const stackEl    = document.getElementById('footer-stack');
+          if (stackEl) stackEl.textContent = 'Built with ☕ and Flutter · ' + topL + ' ' + pct + '%';
+          updateTechStack(languages);
         }
 
-        // ── Release list
-        const container = document.getElementById('release-list');
-        container.innerHTML = '';
-        releases.forEach((r, i) => {
-          const isLatest = i === 0;
-          const url = apkUrl(r);
-          const dl  = dlCount(r);
-          const item = document.createElement('a');
-          item.href = url;
-          item.target = '_blank';
-          item.className = 'release-item';
-          item.innerHTML =
-            '<span class="release-tag' + (isLatest ? ' latest' : '') + '">' + r.tag_name + '</span>' +
-            '<span class="release-name">' + (r.name || r.tag_name) + '</span>' +
-            (dl ? '<span class="release-dl">' + dl + '</span>' : '') +
-            '<span class="release-date">' + fmtDate(r.published_at) + '</span>' +
-            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex-shrink:0"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>';
-          container.appendChild(item);
-        });
+        /* Release list */
+        const rlEl = document.getElementById('release-list');
+        if (rlEl) {
+          rlEl.innerHTML = '';
+          releases.forEach((r, i) => {
+            const isLatest = i === 0;
+            const url = apkUrl(r);
+            const dl  = dlCount(r);
+            const item = document.createElement('a');
+            item.href   = url;
+            item.target = '_blank';
+            item.rel    = 'noopener';
+            item.className = 'release-item';
+            item.innerHTML =
+              '<span class="release-tag' + (isLatest ? ' latest' : '') + '">' + r.tag_name + '</span>' +
+              '<span class="release-name">' + (r.name || r.tag_name) + '</span>' +
+              (dl ? '<span class="release-dl">' + dl + '</span>' : '') +
+              '<span class="release-date">' + fmtDate(r.published_at) + '</span>' +
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex-shrink:0"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>';
+            rlEl.appendChild(item);
+          });
+        }
 
-        // ── Screenshots (dynamic from repo — auto-updates when new screenshots are added)
+        /* Screenshots */
         if (Array.isArray(screenshots)) renderScreenshots(screenshots);
 
-        // ── Contributors
+        /* Contributors */
         if (Array.isArray(contributors) && contributors.length) renderContributors(contributors);
 
+        /* ── Auto-generated sections ── */
+        // 1. What's New (release body)
+        injectWhatsNew(latest);
+
+        // 2. Recent Activity (commits) — only real commits, not merge bots
+        const realCommits = Array.isArray(commits) ? commits : [];
+        if (realCommits.length) injectActivity(realCommits);
+
+        // 3. Open Issues (filter out PRs which also appear in issues endpoint)
+        const realIssues = Array.isArray(issues)
+          ? issues.filter(i => !i.pull_request)
+          : [];
+        if (realIssues.length) injectIssues(realIssues);
+
+        // 4. Repo Topics → pills in tech section
+        if (repo && Array.isArray(repo.topics) && repo.topics.length) {
+          injectTopics(repo.topics);
+        }
+
       } catch (e) {
-        // Graceful fallback
-        document.getElementById('hero-badge').innerHTML =
+        console.warn('GitHub data load failed:', e);
+        /* Graceful fallback — no DOM assumptions about what has been removed */
+        const badgeEl = document.getElementById('hero-badge');
+        if (badgeEl) badgeEl.innerHTML =
           '<span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:8px"></span>Latest Release';
-        document.getElementById('releases-loading').textContent = '';
-        const container = document.getElementById('release-list');
-        container.innerHTML =
-          '<a class="release-item" href="https://github.com/' + REPO + '/releases" target="_blank">' +
+
+        const rlEl = document.getElementById('release-list');
+        if (rlEl) rlEl.innerHTML =
+          '<a class="release-item" href="' + GH + '/releases" target="_blank" rel="noopener">' +
           '<span class="release-tag latest">Latest</span>' +
           '<span class="release-name">View all releases on GitHub</span>' +
           '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted)"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' +
           '</a>';
-        const starsEl = document.getElementById('stat-stars');
-        const dlEl    = document.getElementById('stat-downloads');
-        if (starsEl) starsEl.textContent = '—';
-        if (dlEl)    dlEl.textContent    = '—';
-        document.getElementById('meta-releases-count').textContent = '—';
-        document.getElementById('float-version').textContent = 'Latest';
-        // Keep static screenshot fallback already in HTML
+
+        ['stat-stars','stat-forks','stat-downloads','meta-stars-hero','meta-forks-hero'].forEach(id => {
+          const el = document.getElementById(id); if (el) el.textContent = '—';
+        });
+        const relCount = document.getElementById('meta-releases-count');
+        if (relCount) relCount.textContent = '—';
+        const floatV = document.getElementById('float-version');
+        if (floatV)   floatV.textContent = 'Latest';
         initDotNav();
       }
     }
 
-    // ── Hamburger menu
-    (function() {
+    /* ── Hamburger menu ──────────────────────────────────────────────────── */
+    (function () {
       const btn    = document.getElementById('nav-hamburger');
       const drawer = document.getElementById('nav-mobile');
       if (!btn || !drawer) return;
