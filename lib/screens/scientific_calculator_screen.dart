@@ -53,6 +53,7 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 4),
                   SizedBox(
+                    width: double.infinity,
                     height: 32,
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
@@ -67,10 +68,13 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                           fontSize: 22,
                           color: AppColors.onSurfaceVariant,
                         ),
+                        maxLines: 1,
+                        softWrap: false,
                       ),
                     ),
                   ),
                   SizedBox(
+                    width: double.infinity,
                     height: 64,
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
@@ -82,6 +86,8 @@ class ScientificCalculatorScreen extends ConsumerWidget {
                           fontWeight: FontWeight.w800,
                           color: state.error != null ? AppColors.error : Colors.white,
                         ),
+                        maxLines: 1,
+                        softWrap: false,
                       ),
                     ),
                   ),

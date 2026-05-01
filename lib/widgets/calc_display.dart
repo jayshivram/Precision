@@ -24,6 +24,7 @@ class CalcDisplay extends StatelessWidget {
         children: [
           // Expression line
           SizedBox(
+            width: double.infinity,
             height: 32,
             child: FittedBox(
               fit: BoxFit.scaleDown,
@@ -36,12 +37,14 @@ class CalcDisplay extends StatelessWidget {
                   color: AppColors.onSurfaceVariant,
                 ),
                 maxLines: 1,
+                softWrap: false,
               ),
             ),
           ),
           const SizedBox(height: 8),
           // Result line
           SizedBox(
+            width: double.infinity,
             height: 64,
             child: FittedBox(
               fit: BoxFit.scaleDown,
@@ -54,6 +57,7 @@ class CalcDisplay extends StatelessWidget {
                   color: error != null ? AppColors.error : Colors.white,
                 ),
                 maxLines: 1,
+                softWrap: false,
               ),
             ),
           ),
